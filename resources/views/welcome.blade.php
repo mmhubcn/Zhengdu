@@ -104,16 +104,79 @@
             </header>
             <main>
                 <div class="bg-white py-6 sm:py-8 lg:py-12">
-                    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-                        <p class="text-indigo-500 lg:text-lg font-semibold text-center mb-2 md:mb-3">Introducing</p>
+                    <div x-data="setupEditor('<p>Hello World! :-)</p>')" x-init="() => init($refs.element)">
 
-                        <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Revolutionary
-                            way to build the web</h2>
-
-                        <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of
-                            some simple filler text, also known as placeholder text. It shares some characteristics of a
-                            real written text but is random or otherwise generated.</p>
-                    </div>
+                        <template x-if="editor">
+                          <div class="menu">
+                            <button @click="editor.chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
+                                bold
+                              </button>
+                              <button @click="editor.chain().focus().toggleItalic().run()" :class="{ 'is-active': editor.isActive('italic') }">
+                                italic
+                              </button>
+                              <button @click="editor.chain().focus().toggleStrike().run()" :class="{ 'is-active': editor.isActive('strike') }">
+                                strike
+                              </button>
+                              <button @click="editor.chain().focus().toggleCode().run()" :class="{ 'is-active': editor.isActive('code') }">
+                                code
+                              </button>
+                              <button @click="editor.chain().focus().unsetAllMarks().run()">
+                                clear marks
+                              </button>
+                              <button @click="editor.chain().focus().clearNodes().run()">
+                                clear nodes
+                              </button>
+                              <button @click="editor.chain().focus().setParagraph().run()" :class="{ 'is-active': editor.isActive('paragraph') }">
+                                paragraph
+                              </button>
+                              <button @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
+                                h1
+                              </button>
+                              <button @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
+                                h2
+                              </button>
+                              <button @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }">
+                                h3
+                              </button>
+                              <button @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }">
+                                h4
+                              </button>
+                              <button @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }">
+                                h5
+                              </button>
+                              <button @click="editor.chain().focus().toggleHeading({ level: 6 }).run()" :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }">
+                                h6
+                              </button>
+                              <button @click="editor.chain().focus().toggleBulletList().run()" :class="{ 'is-active': editor.isActive('bulletList') }">
+                                bullet list
+                              </button>
+                              <button @click="editor.chain().focus().toggleOrderedList().run()" :class="{ 'is-active': editor.isActive('orderedList') }">
+                                ordered list
+                              </button>
+                              <button @click="editor.chain().focus().toggleCodeBlock().run()" :class="{ 'is-active': editor.isActive('codeBlock') }">
+                                code block
+                              </button>
+                              <button @click="editor.chain().focus().toggleBlockquote().run()" :class="{ 'is-active': editor.isActive('blockquote') }">
+                                blockquote
+                              </button>
+                              <button @click="editor.chain().focus().setHorizontalRule().run()">
+                                horizontal rule
+                              </button>
+                              <button @click="editor.chain().focus().setHardBreak().run()">
+                                hard break
+                              </button>
+                              <button @click="editor.chain().focus().undo().run()">
+                                undo
+                              </button>
+                              <button @click="editor.chain().focus().redo().run()">
+                                redo
+                              </button>
+                          </div>
+                        </template>
+                    
+                        <div x-ref="element"></div>
+                        <div x-text="content"></div>
+                      </div>
                 </div>
             </main>
             <footer class="bg-white">
@@ -323,6 +386,7 @@
                 </div>
             </footer>
 </body>
+<script src="{{ asset('js/tiptap.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 </html>

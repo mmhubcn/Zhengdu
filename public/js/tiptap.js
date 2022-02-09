@@ -20493,14 +20493,13 @@ __webpack_require__.r(__webpack_exports__);
 
 window.setupEditor = function (content) {
   return {
-    editor: null,
     content: content,
     updatedAt: Date.now(),
     // force Alpine to rerender on selection change
     init: function init(element) {
       var _this = this;
 
-      this.editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_1__.Editor({
+      window.editor = new _tiptap_core__WEBPACK_IMPORTED_MODULE_1__.Editor({
         element: element,
         extensions: [_tiptap_starter_kit__WEBPACK_IMPORTED_MODULE_0__["default"]],
         content: this.content,

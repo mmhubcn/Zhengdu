@@ -3,11 +3,10 @@ import StarterKit from '@tiptap/starter-kit'
 
 window.setupEditor = function(content) {
   return {
-    editor: null,
     content: content,
     updatedAt: Date.now(), // force Alpine to rerender on selection change
     init(element) {
-      this.editor = new Editor({
+      window.editor = new Editor({
         element: element,
         extensions: [
           StarterKit,
